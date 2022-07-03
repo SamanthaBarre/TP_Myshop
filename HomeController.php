@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class HomeController extends AbstractController{
 
@@ -105,14 +104,16 @@ class HomeController extends AbstractController{
         return $this->redirectToRoute('home_panier');
     }
     #[Route("/mes-commandes", name:"home_compte")]
-    public function compte(AuthorizationCheckerInterface $authChecker){ 
-
-
-        if ( true === $authChecker->isGranted('ROLE_MEMBRE')){
+    public function compte(){ 
+        $commande = new Commande();
+        $user = $doctrine->get();
+        if ($user -> is_authenticated()){
             return $this->render("front/compte.html.twig");
         }else{
-            return $this->redirectToRoute("app_register");
+            return $this->render("security/login.html.twig");
         }
+       
+
 
     }
 
