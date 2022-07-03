@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<main class="container m-5">
+<h1>{{ produit.titre }}</h1>
+<div class="card" style="width: 50rem;">
+
+    <div class="row text-center">
+        <img src="upload/{{ asset(produit.photo)}}" alt="" class="col-3">
+        <p class="col-3">{{ produit.description }}</p>
+    
+    
+    </div>
+    </div>
+
+    <a href="" class="btn btn-primary m-3">Ajouter au panier</a>
+  
+</main>
+
+{% endblock %}

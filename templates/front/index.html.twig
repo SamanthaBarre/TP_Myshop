@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="row">
+{% for produit in produits %}
+<div class="col-3 m-3">
+<div class="card" style="width: 18rem;">
+<div class="card-header">
+     <h5 class="card-title">{{ produit.titre}}</h5>
+  </div>
+  <img class="card-img-top " src="/upload{{ asset(produit.photo)}}" alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text">{{ produit.description}}</p>
+  </div>
+  <div class="card-footer">
+    <p class="card-text"> {{ produit.prix | deviseFr}} </p>
+    <a class="btn btn-primary my-3" href="{{ path("produit_show", {"id" : produit.id })}}"> Voir le produit </a>
+    <a class="btn btn-primary" href="{{ path("home_add_panier", {'id' : produit.id})}}"> Ajouter au panier </a>
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
